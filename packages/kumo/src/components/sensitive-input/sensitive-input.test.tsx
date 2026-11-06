@@ -45,4 +45,31 @@ describe("SensitiveInput", () => {
     const inputEl = container.querySelector("input");
     expect(inputEl?.parentElement?.className).toContain("ring-kumo-danger");
   });
+
+  it("renders the description when no label is provided", () => {
+    const { getByText } = render(
+      <SensitiveInput
+        aria-label="Secret"
+        description="Keep this value private"
+      />,
+    );
+    expect(getByText("Keep this value private")).toBeTruthy();
+  });
+
+  it("renders the error message when no label is provided", () => {
+    const { getByText } = render(
+      <SensitiveInput aria-label="Secret" error="A value is required" />,
+    );
+    expect(getByText("A value is required")).toBeTruthy();
+  });
+
+  it("does not add an empty label element when only a description is provided", () => {
+    const { container } = render(
+      <SensitiveInput
+        aria-label="Secret"
+        description="Keep this value private"
+      />,
+    );
+    expect(container.querySelector("label")).toBeNull();
+  });
 });

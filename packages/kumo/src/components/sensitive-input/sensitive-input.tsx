@@ -492,8 +492,8 @@ export const SensitiveInput = forwardRef<HTMLInputElement, SensitiveInputProps>(
       </div>
     );
 
-    // Render with Field wrapper if label is provided
-    if (label) {
+    // Render with Field wrapper if a label, description or error is provided
+    if (label || description || error) {
       return (
         <Field
           label={label}
